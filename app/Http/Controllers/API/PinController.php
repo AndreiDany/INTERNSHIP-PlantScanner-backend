@@ -16,14 +16,22 @@ class PinController extends Controller
         return Pin::all();
     }
 
-    // Extragerea unui pin in functie de id
-    public function getById(Request $request, $pinId)
+    // Verificarea daca un pin trimis din frontend exista in baza de date
+    public function verifyPin(Request $request)
     {
+        $jsonData = $request->all();
+        $pin = $jsonData['pin'];
 
-        return Pin::where('id', $pinId)->get();
+        $pinExists = Pin::where('pin', $pin)->exists();
+
+        if ($pinExists) {
+            return response()->json(['message' => 'success'], 200);
+        } else {
+            return response()->json(['message' => 'Error: Pin does not exist in the database.'], 404);
+        }
     }
 
-    // Create, update, delete
+    // Create, update
     function addPin(Request $request)
     {
 
@@ -45,21 +53,5 @@ class PinController extends Controller
         $pin->update(['pin' => $p]);
 
         return response()->json(['message' => 'Pin updated successfully.']);
-    }
-
-    function deletePin(Request $request, $pinId)
-    {
-
-        try {
-            $pin = Pin::findOrFail($pinId);
-        } catch (ModelNotFoundException $e) {
-            return response()->json([
-                'message' => 'Pin not found.'
-            ], 403);
-        }
-
-        $pin->delete();
-
-        return response()->json(['message' => 'Pin deleted successfully.']);
     }
 }

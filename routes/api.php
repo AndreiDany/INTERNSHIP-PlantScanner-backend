@@ -28,11 +28,8 @@ Route::delete('/picture/{pictureId}', [App\Http\Controllers\API\PictureControlle
 
 
 // Rutele pentru pin-uri
-Route::get('/pins', [App\Http\Controllers\API\PinController::class, 'getAll']);
-Route::get('/pin/{pinId}', [App\Http\Controllers\API\PinController::class, 'getById']);
-Route::post('/pin', [App\Http\Controllers\API\PinController::class, 'addPin']);
+Route::post('/verify-pin', [App\Http\Controllers\API\PinController::class, 'verifyPin']);
 Route::post('/pin/{pinId}', [App\Http\Controllers\API\PinController::class, 'editPin']);
-Route::delete('/pin/{pinId}', [App\Http\Controllers\API\PinController::class, 'deletePin']);
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
