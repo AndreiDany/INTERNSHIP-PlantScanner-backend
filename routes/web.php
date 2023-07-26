@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/verify-pin', [App\Http\Controllers\API\PinController::class, 'verifyPin']);
+
 Route::get('/', function () {
     return view('welcome');
 });
