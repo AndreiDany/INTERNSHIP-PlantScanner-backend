@@ -25,7 +25,8 @@ class PinController extends Controller
         $pinExists = Pin::where('pin', $pin)->exists();
 
         if ($pinExists) {
-            return response()->json(['message' => 'success'], 200);
+            $pin = Pin::where('pin', $pin)->first();
+            return response()->json(['message' => 'success', 'userId' => $pin->user_id], 200);
         } else {
             return response()->json(['message' => 'Error: Pin does not exist in the database.'], 404);
         }

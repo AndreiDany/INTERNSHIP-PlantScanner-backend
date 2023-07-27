@@ -15,6 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/verify-pin', [App\Http\Controllers\API\PinController::class, 'verifyPin']);
 
+Route::post('/save-picture', [App\Http\Controllers\API\PictureController::class, 'savePicture']);
+
+Route::get('/pictures/{userId}', [App\Http\Controllers\API\PictureController::class, 'getByUserId']);
+
 Route::get('/', function () {
     return view('welcome');
 });

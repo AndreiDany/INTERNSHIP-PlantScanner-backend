@@ -20,8 +20,9 @@ Route::post('/register', [App\Http\Controllers\API\UserController::class, 'regis
 
 
 // Rutele pentru fotografii
+Route::post('/save-picture', [App\Http\Controllers\API\PictureController::class, 'savePicture']);
+Route::get('/pictures/{userId}', [App\Http\Controllers\API\PictureController::class, 'getByUserId']);
 Route::get('/pictures', [App\Http\Controllers\API\PictureController::class, 'getAll']);
-Route::get('/picture/{pictureId}', [App\Http\Controllers\API\PictureController::class, 'getById']);
 Route::post('/picture', [App\Http\Controllers\API\PictureController::class, 'addPicture']);
 Route::post('/picture/{pictureId}', [App\Http\Controllers\API\PictureController::class, 'editPicture']);
 Route::delete('/picture/{pictureId}', [App\Http\Controllers\API\PictureController::class, 'deletePicture']);
